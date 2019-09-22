@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <!-- head stuff goes here -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+            </head>
+
+    <body>
+        <div class = 'search'>
+            <input type="text" name="search" id="search1">
+            <button type="button">Search</button>
+
+            </div>  
+        <template id="userTemplate">
+            
+            <div class = 'container'>
+              <div class = 'user'>
+                <div class = 'profile_picture'>
+                  <img src = 'user_avatar' >
+                </div>
+                <div class = 'name'>
+                  <h1>user_label</h1>
+                </div>
+              </div>
+            </div>
+          </template>
+
+          <div class = 'enter'>
+
+          <input type="text" id="fname1" name="fname" required>
+          <input type="text" id="lname1" name="lname" required>
+
+            <input type="submit" id="click" value="add" />
+            </div>
+    </body>
+
+    <script>
+
+        $( document ).ready(function(){
+
+
+
+
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'https://reqres.in/api/users', true)
+            xhr.onload = function(){
+            var items = JSON.parse(xhr.responseText)
+                console.log(xhr.responseText);
+            userData = items.data;
+                
+                console.log(userData);
+
+                var userTemplate = $('#userTemplate').html();
+
+                $(document.body).append(userData.map( user => {
+                    return userTemplate 
+                        .replace( 'user_avatar', user.avatar )
+                        .replace( 'user_label', `${user.first_name} ${user.last_name}` )
+                })
+                );
+        }
+xhr.send()
+
+
+$("#click").click(function() {
+            var elementAvatar = "https://source.unsplash.com/random/128x128";
+            var firstNameEl = $('#fname1').val();
+            var lastNameEl = $('#lname1').val();
+
+             
+$(".container").remove();
+ userData.push({"first_name": firstNameEl, "last_name": lastNameEl, "avatar": "https://source.unsplash.com/random/128x128"});
+
+ var userTeamplate = $('#userTemplate').html();
+
+ $(document.body).append(userData.map( user => {
+                    return userTeamplate 
+                    .replace( 'user_avatar', user.avatar )
+                        .replace( 'user_label', `${user.first_name} ${user.last_name}` )
+                })
+                );
+        
+    console.log(userData);
+})
+
+    
+
+})
+
+
+
+
+
+    
+    </script>
+
+
+
+
+
+
+
+    <!-- STYLES GO HERE -->
+
+    <style>
+        .body, h1, h2, h3, h4, h5, h6, p {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            margin: auto 10%;
+        }
+
+        .enter {
+            margin: 150px 10px 10px 10px;
+
+        }
+
+        .search {
+            margin: 10px 10px 10px 500px;
+        }
+        .user {
+            background: #efefef;
+            box-shadow: 0px 6px 13px -7px black;
+            border-radius: 5px;
+            padding-right: 20px;
+            display: flex;
+            margin: 20px 0;
+            align-items: center;
+            border-top-left-radius: 65px;
+            border-bottom-left-radius: 65px;
+        }
+        .profile_picture {
+            height: 128px;
+        }
+        .profile_picture > img {
+            border-radius: 50%;
+        }
+        .user > .name {
+            margin-left: 50px;
+            display: inline-block;
+        }
+    </style>
+
+</html>
